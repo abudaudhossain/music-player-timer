@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timer</title>
+    <style>
+        section {
+            position: relative;
+            width: 600px;
+            background: #bbaaf5;
+            height: 300px;
+            margin: 0;
+            padding: 0;
+            display: inline-block;
+
+        }
+
+        .container {
+            /* position: relative; */
+            width: 550px;
+            background: green;
+            height: 30px;
+            margin: 50px 25px;
+            box-sizing: border-box;
+            display: inline-block;
+            /* padding: 25px; */
+            border-radius: 50px;
+            overflow: hidden;
+        }
+
+        .timer {
+            background-color: #3b0dcf;
+            width: 100%;
+            height: 100%;
+            display: block;
+            transition: all 0.01s;
+
+        }
+    </style>
+</head>
+
+<body>
+    <section>
+        <input type="number" id="song-time" placeholder="enter time">
+        <button onclick="myFunction()">Click me</button>
+        <div class="container" id="time-area">
+            <div class="timer" id="timer">
+
+            </div>
+        </div>
+        <span id="time">12</span>
+    </section>
+
+
+    <script>
+        const timer = document.getElementById("timer");
+        const getSongTime = document.getElementById('song-time');
+        const time = document.getElementById("time");
+        let songTimeValue;
+        const myFunction = () => {
+            songTimeValue = getSongTime.value;
+            console.log(songTimeValue);
+            myProcessBar(parseInt(songTimeValue));
+            timer.style.width = songTimeValue + "%";
+        }
+
+        
+        const myProcessBar = (totalTime) => {
+            let value = 0;
+            let netTime = 0;
+            const myInterval = setInterval(() => {
+                timer.style.width = value + "%";
+                time.innerText = netTime + "s";
+                netTime++;
+                if (netTime > totalTime) {
+                    clearInterval(myInterval);
+                    
+                }
+                value += 100/ totalTime;
+            }, 1000);
+        }
+
+        
+
+
+    </script>
+</body>
+
+</html>
